@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <head>
+      <title> Hello, Dog! </title>
+        <!-- Required meta tags -->
+        <!-- <meta charset="UTF-8"> -->
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+        <!-- Bootstrap CSS --> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" type="text/css" href="style.css"> --> 
+        <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='style.css') }}">
+</head>
+
+
+<body>
+
+  <h1>Data Scientist Nanodegree 
+
+  </h1>
+
+    <!--navbar links-->
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Capstone Project</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.udacity.com/course/data-scientist-nanodegree--nd025">Udacity</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+      <div class="row ml-1 mt-2">
+        <div class="col-1">
+          <a href="https://www.github.com">
+            <img class="img-fluid" src="static/git_hub.png" alt="github logo">
+          </a>
+        </div>
+        
+        <div class="col-1 border-right">
+          <a href="https://www.linkedin.com/in/jacek-niedzielski-11b4661b3/">
+            <img class="mb-3 img-fluid" src="static/Linked_in.png" alt="linkedin logo">
+          </a>
+
+  
+        </div>
+        
+
+        <!-- visualizations column-->
+        <div class="col-10">
+          <h2>Dog Breed Classifier</h2>
+          
+  
+          <div class="container">
+            <div class="row mb-3">
+              <div class="col-4">
+                <img class="img-fluid" src="../static/MainPage.jpg" alt="chart one">
+              </div>
+              <div class="col-4">
+                <img class="img-fluid" src="../static/MainPage.jpg" alt="chart two">
+              </div>
+              <div class="col-4">
+                <img class="img-fluid" src="../static/MainPage.jpg" alt="chart three">
+              </div>
+            </div>
+            <div class="row mb-3">
+
+                        
+              <div class="col-6">
+                <form method="POST" action="{{ url_for('index') }}", enctype = "multipart/form-data",  id="formFile">
+
+                  {{ dog.csrf_token }}
+                  <input type="file" name="file" id="file" class="inputfile"/>
+                  <label for="file">{{ dog.photograph.label }} : {{ dog.photograph }}</label>
+            
+              
+                  <ul>
+                      {% for error in dog.photograph.errors %}
+                          {{ error }}
+                      {% endfor %}
+                      </ul>
+                      <input type = "submit" value = "Classify for a dog breed" id="submitSpecial">
+                    </form>
+              
+                  
+               
+              
+              
+              </div>
+                
+                          
+              </div>
+  
+            </div>
+  
+          </div>
+        </div>
+      </div>
+ 
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+  </html>
