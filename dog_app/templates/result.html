@@ -13,5 +13,18 @@
 </head>
 
 <body>
-    <h1>Main</h1>
-      <!--navbar links--
+    <h1>CNN Prediction:</h1>
+    <h2>{{ value }}</h2>
+    <h3><img src="../static/to_predict.jpg" alt="No image" height=480 width=480>
+        {% if "totally" in value %}
+          <img src="../static/to_compare.jpg" alt ="No image" height=480 width=480></h3>
+        {% endif %}
+    <br>
+    <br>
+    <form action="/" method="POST">  
+      <input type = "submit" class = "btn"  value = "" id="submitSpecial2">  
+    </form>
+ 
+      
+  
+  </body>

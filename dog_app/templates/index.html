@@ -52,40 +52,39 @@
         
 
         <!-- visualizations column-->
-        <div class="col-10">
+        <div class="col-5">
           <h2>Dog Breed Classifier</h2>
-          
-  
-          <div class="container">
-            <div class="row mb-3">
-              <div class="col-4">
                 <img class="img-fluid" src="../static/MainPage.jpg" alt="chart one">
-              </div>
-              <div class="col-4">
-                <img class="img-fluid" src="../static/MainPage.jpg" alt="chart two">
-              </div>
-              <div class="col-4">
-                <img class="img-fluid" src="../static/MainPage.jpg" alt="chart three">
-              </div>
-            </div>
-            <div class="row mb-3">
+                <form action = "" method="POST" enctype = "multipart/form-data"  id="formFile" >
+                  {{ dog.csrf_token }}
+                  {{ dog.photograph.label}} {{dog.photograph}}
+               
+            
+                  
+                  {% if dog.photograph.errors %}
+                  <ul class="errors">
+                  {% for error in dog.photograph.errors %}
+                      <li>{{ error }}</li>
+                  {% endfor %}
+                  </ul>
+                  {% endif %}
+                  <div class="row-1"></div>
+                  <input type = "submit" class = "btn"  value = "Classify for a dog breed" id="submitSpecial">
+                </div>      
+                </form>
+         
+           
 
                         
-              <div class="col-6">
-                <form method="POST" action="{{ url_for('index') }}", enctype = "multipart/form-data",  id="formFile">
+          <div class="col-5">
+                <h2>About this app:</h2>
+                <h3> This web application holds the convolutional neural network which classifies photo of your choice to one <br>
+                  of the 133 labeled dog breeds. If you provide a photo of an human, the application will return the most <br>
+                  resembling dog breed. If you want to see more details about how this app works under the hood please click <br>
+                  the git hub icon on the left side of this webpage. It will redirect you to the correspondend repository.
+                </h3>
 
-                  {{ dog.csrf_token }}
-                  <input type="file" name="file" id="file" class="inputfile"/>
-                  <label for="file">{{ dog.photograph.label }} : {{ dog.photograph }}</label>
-            
-              
-                  <ul>
-                      {% for error in dog.photograph.errors %}
-                          {{ error }}
-                      {% endfor %}
-                      </ul>
-                      <input type = "submit" value = "Classify for a dog breed" id="submitSpecial">
-                    </form>
+
               
                   
                
