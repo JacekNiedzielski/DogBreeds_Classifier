@@ -5,7 +5,7 @@ Application for classifying dog breeds based on the convolutional neural network
 The "DogBreeds_Classifier" is my capstone project which is the final submission in Udacity Data Scientist Nanodegree program.
 It uses the concepts of convolutional neural networks (short CNN) for solving a dog breed classification problem.
 The algorithms beeing implemented in this application are trained via supervised learning methods.
-Below one can find the overview of the training, validation and test data set:
+Below one can find the overview of the training, validation and test data set which were used to train the CNN network from scratch
 
 ### The training data set
 ![image](https://user-images.githubusercontent.com/64994740/152216245-5303f3c9-dc56-4973-ab93-89dab1745647.png)
@@ -14,6 +14,8 @@ Below one can find the overview of the training, validation and test data set:
 ### The test data set
 ![image](https://user-images.githubusercontent.com/64994740/152216401-1ccfbb11-64db-4a69-b609-33b7ea93941e.png)
 
+Since the performance of this network was not satisfactory and one would need to make much deeper architecture since the low train accuracy indicates underfitting - which would 
+increase the training time significantly, I have decided to make use of transfer learning. For that I have used the the keras Resnet50 application which is based on imagenet dataset. The achieved accuracy for this model by this particular commit is around 80%. I have chosen the accuracy despite the fact that the data is quite inbalanced. Since the problem domain is concept of fun application is is not so important to get high recall or precision as in case of more serious topics (for example account fraud classification)
 
 
 # Analysis of the USA Road Accidents
