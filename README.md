@@ -5,8 +5,14 @@ Application for classifying dog breeds based on the convolutional neural network
 The "DogBreeds_Classifier" is my capstone project which is the final submission in Udacity Data Scientist Nanodegree program.
 It uses the concepts of convolutional neural networks (short CNN) for solving a dog breed classification problem.
 The algorithms beeing implemented in this application are trained via supervised learning methods.
-Below one can find the overview of the training, validation and test data set:<br>
+Below one can find the overview of the training, validation and test data set:
+
+### The training data set
 ![image](https://user-images.githubusercontent.com/64994740/152216245-5303f3c9-dc56-4973-ab93-89dab1745647.png)
+### The validation data set
+![image](https://user-images.githubusercontent.com/64994740/152216419-4521f267-12d0-48df-94fa-0cea1134c25a.png)
+### The test data set
+![image](https://user-images.githubusercontent.com/64994740/152216401-1ccfbb11-64db-4a69-b609-33b7ea93941e.png)
 
 
 
