@@ -1,8 +1,5 @@
-from flask import Flask, render_template, url_for, redirect, flash 
+from flask import Flask, render_template, url_for, redirect
 from flask_wtf import FlaskForm
-from grpc import ssl_channel_credentials
-from wtforms import StringField, IntegerField, BooleanField, DateField
-from wtforms.validators import DataRequired, Length, ValidationError, Email
 import os
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from werkzeug.utils import secure_filename
@@ -10,7 +7,7 @@ import numpy as np
 from glob import glob
 import cv2
 from flask import request
-
+import matplotlib.pyplot as plt
 
 from tensorflow.keras.preprocessing import image 
 from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
@@ -23,15 +20,18 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "AComplicat3dText."
 
 
-face_cascade = cv2.CascadeClassifier('../haarcascades/haarcascade_frontalface_alt.xml')
+face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_alt.xml')
 
 
 bottleneck_features = np.load('bottleneck_features/DogResnet50Data.npz')
 Resnet50_model = load_model("trained_network")
 Resnet50_model_detector = ResNet50(weights = "imagenet")
 
+dog_names = []
 
-dog_names = [item[20:-1] for item in sorted(glob("../dogImages/train/*/"))]
+with open("dog_categories.txt", encoding="utf-8") as f:
+    dog_names.append(f.readline())
+#dog_names = [item[20:-1] for item in sorted(glob("../dogImages/train/*/"))]
     
 
 
@@ -56,12 +56,17 @@ def ResNet50_predict_labels(img_path):
 def extract_Resnet50(tensor):
 	return ResNet50(weights='imagenet', include_top=False, pooling="avg" ).predict(preprocess_input(tensor))
 
+
 def Resnet50_predict_breed(img_path):
     bottleneck_feature = extract_Resnet50(path_to_tensor(img_path))
     bottleneck_feature = np.expand_dims(bottleneck_feature, axis=0)
     bottleneck_feature = np.expand_dims(bottleneck_feature, axis=0)
     predicted_vector = Resnet50_model.predict(bottleneck_feature)
-    return dog_names[np.argmax(predicted_vector)]
+    #img = image.load_img(img_path, target_size=(224, 224))
+    #plt.imshow(img)
+    #plt.show()
+    string = "For me this photo shows a {}".format(dog_names[np.argmax(predicted_vector)][3:])
+    return string
 
 
 def face_detector(img_path):
@@ -70,6 +75,8 @@ def face_detector(img_path):
     faces = face_cascade.detectMultiScale(gray)
     if  len(faces) > 0:
         return True
+    else:
+        return False
     
 def dog_detector(img_path):
     prediction = ResNet50_predict_labels(img_path)
@@ -79,34 +86,40 @@ def dog_detector(img_path):
         return False
     
     
+def classifier(img_path,
+               face_detector = face_detector,
+               dog_detector = dog_detector,
+               breed_detector = Resnet50_predict_breed):
     
-
-
-
-def classifier(img_path):
-    if (dog_detector(img_path) == False and face_detector(img_path) == False):
-        return "This is neither a human nor a dog"
+    if dog_detector(img_path) == False and face_detector(img_path) == False:
+            string = "This is neither human nor dog. Sorry I cannot define what it is."
+           
+           
+    elif face_detector(img_path) == True and dog_detector(img_path) == False:
+            breed_name = breed_detector(img_path).split("shows a")[1][1:]
+            string = "This person looks totally like {}".format(breed_name)
+          
+            current_breed = [substring for substring in os.listdir("static") 
+                       if breed_name in substring][0]
+                                                                
+           
+                         
+            img2 = image.load_img(os.path.join("static",current_breed))
+            to_compare = secure_filename("to_compare.jpg")
+            img2.save(os.path.join(app.root_path, "static", to_compare))
     
-    elif (face_detector(img_path) == True and dog_detector(img_path) == False):
-        return "This person looks totally like {}".format(Resnet50_predict_breed(img_path))
-
     elif dog_detector(img_path) == True:
-        return Resnet50_predict_breed(img_path)
+            string = breed_detector(img_path)
     
-    
-    
+    return string
 
 
 
-
-
-
-string = str((classifier("../images/Bucky_4.jpg")))
 
 
 class DogForm(FlaskForm):
-    
-    photograph = FileField("Click me to choose a file", validators = [FileRequired(), FileAllowed(["jpg", "png"], "Accepted are only the .jpg and .png files.")])
+    photograph = FileField("Click here to choose a file", validators = [FileRequired(), FileAllowed(["jpg", "png", "jpeg"], 
+                                                                                    "Accepted are only the .jpg, .jpeg and .png files.")])
 
 
 
@@ -116,57 +129,28 @@ class DogForm(FlaskForm):
 def index():
     
     dog = DogForm()
+
     
-    if request.method == "POST" and dog.validate_on_submit():
-        print("Proper content!")
+    if dog.validate_on_submit():
+ 
         f = dog.photograph.data
-        filename = f.filename
-        f.save(os.path.join(app.root_path, "static", filename))       
-        return redirect(url_for("result"))
+        to_predict = secure_filename("to_predict.jpg")
+        f.save(os.path.join(app.root_path, "static", to_predict))     
+        
+        return redirect(url_for(("result")))
 
-    elif request.method == "POST" and dog.validate_on_submit() == False:
-        return redirect(request.referrer)
-
-    print("rendering")
+    return render_template("index.html", dog=dog)
     
-    return render_template("index.html", dog = dog)
-    
-  
-    
-    
-    
-    
-
-"""
-
-    if request.method == "GET" and dog.validate_on_submit() == False:
-        return render_template("index.html", dog = dog)
-    
-    if request.method == "POST" and dog.validate_on_submit():
-        return redirect(url_for("result"))
-    
-    if request.method == "POST" and dog.validate_on_submit() == False:
-            
-        return render_template("index.html", dog = dog)
-"""
-
 
 @app.route("/result.html", methods=["POST", "GET"])
-def result(string = string):
-   
+def result():
+    string = str((classifier("static/to_predict.jpg")))
     return render_template("result.html", value = string)
 
 
 
 if __name__=='__main__':
     app.run()
-
-
-
-
-
-
-
 
 
 
