@@ -30,7 +30,9 @@ Resnet50_model_detector = ResNet50(weights = "imagenet")
 dog_names = []
 
 with open("dog_categories.txt", encoding="utf-8") as f:
-    dog_names.append(f.readline())
+    for line in f.readlines():
+        dog_names.append(line)
+dog_names = [str(breed_name[:-1]) for breed_name in dog_names]
 #dog_names = [item[20:-1] for item in sorted(glob("../dogImages/train/*/"))]
     
 
@@ -65,7 +67,7 @@ def Resnet50_predict_breed(img_path):
     #img = image.load_img(img_path, target_size=(224, 224))
     #plt.imshow(img)
     #plt.show()
-    string = "For me this photo shows a {}".format(dog_names[np.argmax(predicted_vector)][3:])
+    string = "For me this photo shows: {}".format(dog_names[np.argmax(predicted_vector)])
     return string
 
 
@@ -92,18 +94,16 @@ def classifier(img_path,
                breed_detector = Resnet50_predict_breed):
     
     if dog_detector(img_path) == False and face_detector(img_path) == False:
-            string = "This is neither human nor dog. Sorry I cannot define what it is."
+            string = "This is neither a human nor a dog. Sorry I cannot define what it is."
            
            
     elif face_detector(img_path) == True and dog_detector(img_path) == False:
-            breed_name = breed_detector(img_path).split("shows a")[1][1:]
+            breed_name = breed_detector(img_path).split("shows a")[1]
             string = "This person looks totally like {}".format(breed_name)
-          
-            current_breed = [substring for substring in os.listdir("static") 
-                       if breed_name in substring][0]
-                                                                
+            
+            current_breed = [substring for substring in os.listdir("static")
+                       if breed_name[1:] in substring][0]
            
-                         
             img2 = image.load_img(os.path.join("static",current_breed))
             to_compare = secure_filename("to_compare.jpg")
             img2.save(os.path.join(app.root_path, "static", to_compare))
