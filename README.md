@@ -5,7 +5,7 @@ Application for classifying dog breeds based on the convolutional neural network
 The "DogBreeds_Classifier" is my capstone project which is the final submission in Udacity Data Scientist Nanodegree program.
 It uses the concepts of convolutional neural networks (short CNN) for solving a dog breed classification problem.
 The algorithms beeing implemented in this application are trained via supervised learning methods.
-Below one can find the overview of the training, validation and test data set which were used to train the CNN network from scratch
+Below one can find the overview of the training, validation and test data set which were used to train the CNN network from scratch.
 
 ### The training data set
 ![image](https://user-images.githubusercontent.com/64994740/152216245-5303f3c9-dc56-4973-ab93-89dab1745647.png)
@@ -14,8 +14,45 @@ Below one can find the overview of the training, validation and test data set wh
 ### The test data set
 ![image](https://user-images.githubusercontent.com/64994740/152216401-1ccfbb11-64db-4a69-b609-33b7ea93941e.png)
 
-Since the performance of this network was not satisfactory and one would need to make much deeper architecture since the low train accuracy indicates underfitting - which would 
-increase the training time significantly, I have decided to make use of transfer learning. For that I have used the the keras Resnet50 application which is based on imagenet dataset. The achieved accuracy for this model by this particular commit is around 80%. I have chosen the accuracy despite the fact that the data is quite inbalanced. Since the problem domain is concept of fun application is is not so important to get high recall or precision as in case of more serious topics (for example account fraud classification)
+The network architecture is visible in the following schema:
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 224, 224, 16)      208       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 112, 112, 16)      0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 112, 112, 32)      2080      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 56, 56, 32)        0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 56, 56, 64)        8256      
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 28, 28, 64)        0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 28, 28, 32)        8224      
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 14, 14, 32)        0         
+_________________________________________________________________
+dropout (Dropout)            (None, 14, 14, 32)        0         
+_________________________________________________________________
+flatten (Flatten)            (None, 6272)              0         
+_________________________________________________________________
+dense (Dense)                (None, 500)               3136500   
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 500)               0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 133)               66633     
+=================================================================
+Total params: 3,221,901
+Trainable params: 3,221,901
+Non-trainable params: 0
+
+
+Since the performance (accuracy) of this network was not satisfactory and one would need to make much deeper architecture since the low train accuracy indicates underfitting - which would increase the training time significantly, I have decided to make use of transfer learning. For that I have used the the keras Resnet50 application which is based on imagenet dataset. The achieved accuracy for this model by this particular commit is around 80%. I have chosen the accuracy despite the fact that the data is quite inbalanced. Since the problem domain is concept of fun application is is not so important to get high recall or precision as in case of more serious topics (for example account fraud classification). For more details regarding analysis steps and conclusions please refer to the jupyter notebook beeing part of this repository `dog_app.ipynb`.
+
+## Application
 
 
 # Analysis of the USA Road Accidents
