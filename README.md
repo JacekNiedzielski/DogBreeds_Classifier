@@ -52,13 +52,13 @@ Provided that the dog or human is given, the classifier implements the CNN model
 For validation I have decided to use the `accuracy` metrics. Justification for this choice can be found in the "Metrics" chapter.
 As mentioned before I have tried different architecures and parameters in order to achieve reasonable results. Please find some of the main steps below. Please refer to `dog_app.ipynb` for more details.
 
-1. Best model made from scratch with data augmentation (width and height shift range equal to 15%). Achieved accuracy 13%
+1. Best model made from scratch with data augmentation (width and height shift range equal to 15%). Achieved accuracy 13%<br>
 ![image](https://user-images.githubusercontent.com/64994740/152441278-63545f56-1359-4ec8-933f-ed92b7ceb216.png)
 ![image](https://user-images.githubusercontent.com/64994740/152441348-26a81e58-37f6-4d1f-9746-2dfd1977ea0c.png)
-2. Ensemble of several models
+2. Ensemble of several models<br>
 ![image](https://user-images.githubusercontent.com/64994740/152441595-48d4a014-ce95-42b3-8066-afc593162eea.png)
 ![image](https://user-images.githubusercontent.com/64994740/152441631-758b8a67-320b-4795-aabb-18817c073c99.png)
-3. Final Architecture based on keras Resnet (data augmentation brings no added value considering the increased training time - therefore not implemented)
+3. Final Architecture based on keras Resnet (data augmentation brings no added value considering the increased training time - therefore not implemented)<br>
 ![image](https://user-images.githubusercontent.com/64994740/152441828-73edd669-b7a5-479c-91ee-9e768597542c.png)
 ![image](https://user-images.githubusercontent.com/64994740/152441856-e9f50c7f-6682-4dd4-be0f-a4a8c9b7e3e6.png)
 
