@@ -35,12 +35,15 @@ The data exploration and visualisation steps are presented in detail in `dog_app
 It means only around 62 photos per breed. Taking into consideration the fact, that some breeds are very simillar to each other, low accuracy shouldn't be a surprise. On the other hand the Resnet50 model is trained on millions of different images from imagenet. This is one for the reasons why it performs much better.
 
 ## Data Preprocessing
-In case of this project no preprocessing steps were necessary. All of the data provided by Udacity was "ready to learn". The only data preprocessing steps were those connected to data augmentation, but it shall be rather defined as model tuning, than pure wrangling.
+In case of this project no wrangling steps were necessary. All of the data provided by Udacity was "ready to learn". The only data wrangling steps were those connected to data augmentation, but it shall be rather defined as model tuning, than pure wrangling. When it comes to preprocessing there is one obvious step were the images have to be changed into tensors. Please refer to the picture below:<br>
+![image](https://user-images.githubusercontent.com/64994740/152436928-a70b042f-4256-4072-9712-8ef3397b2fd2.png)
 
-##Implementation
+
+## Implementation
 After successful training of the CNN based on transfer learning one has to build a classifier. Basically we can divide the classifier into three parts. More details are available in the `dog_app.ipynb`, bellow the summary:<br>
 ![image](https://user-images.githubusercontent.com/64994740/152436393-ff20b657-b924-4561-b96b-5d11645ab92b.png)
 
+The classifier accepts several arguments. Firstly it takes the path to the image which we want to predict. The image has to be transformed into tensor
 
 
 
