@@ -30,7 +30,7 @@ Since the train performance (accuracy) of the "made from scratch network" was no
 
 ## Data Exploration and Data Visualisation
 
-The data exploration and visualisation steps are presented in detail in `dog_app.ipynb` (ipywidgets library required!). However I would like to emphasize it here once more, that the data used for building the CNN models from scratch is imbalanced. Bigger problem is however low amount of data. Below the summary:
+The data exploration and visualisation steps are presented in detail in `dog_app.ipynb` (ipywidgets library required!). However I would like to emphasize it here once more, that the data used for building the CNN models from scratch is imbalanced. Bigger problem is however low amount of data. Below the summary:<br>
 ![image](https://user-images.githubusercontent.com/64994740/152435343-83554706-6901-4189-ba1d-638c58a2f86c.png)
 
 It means only around 62 photos per breed. Taking into consideration the fact, that some breeds are very simillar to each other, low accuracy shouldn't be a surprise. On the other hand the Resnet50 model is trained on millions of different images from imagenet. This is one for the reasons why it performs much better.
