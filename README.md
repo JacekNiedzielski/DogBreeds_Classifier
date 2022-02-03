@@ -62,13 +62,11 @@ As mentioned before I have tried different architecures and parameters in order 
 ![image](https://user-images.githubusercontent.com/64994740/152441828-73edd669-b7a5-479c-91ee-9e768597542c.png)
 ![image](https://user-images.githubusercontent.com/64994740/152441856-e9f50c7f-6682-4dd4-be0f-a4a8c9b7e3e6.png)
 
+The performance of the final architecture on example photos is to be found at the end of the `dog_app.ipynb`.
 
+##End Reflections and Improvement Proposals
 
-
-
-
-
-
+The end solution with 80% accuracy is for sure not perfect, but as mentioned many times before, acceptable for the "fun" application. Investing more time into testing the best CNN architectures, balancing the data sets, so that all of the dog breeds would have approximately the same number of representation photos, and making ensemble of several transfer-learning CNNs are the possible directions for improvement.
 
 ## Application
 The application is build on top of `Flask` framework. It makes use of the classification algorithm defined during abovementioned project, and predicts the dog breed from the uploaded photo. If a picture of an human is provided, the application will return the most resembling dog breed. If the photograph contains neither human nor dog (according to the classifier) an appropiate message will be returned.
