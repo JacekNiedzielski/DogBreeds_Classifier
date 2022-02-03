@@ -48,6 +48,17 @@ The classifier accepts several arguments. Firstly it takes the path to the image
 Then the classifier makes use of `face_detector` and `dog_detector` functions in order to identify whether or not a human or a dog is present in the picture. The haarcascades and resnet applications are working under the hood of the face_detector and dog_detector functions respectively. More details are given in the jupyter notebook file. 
 Provided that the dog or human is given, the classifier implements the CNN model to predict the breed. In case of dog it is just the inferred breed, in case of human the most resembling dog breed.
 
+## Refinement; Model Evaluation and Validation
+For validation I have decided to use the `accuracy` metrics. Justification for this choice can be found in the "Metrics" chapter.
+As mentioned before I have tried different architecures and parameters in order to achieve reasonable results. Please find some of the main steps below. Please refer to `dog_app.ipynb` for more details.
+
+1. Best model made from scratch with data augmentation (width and height shift range equal to 15%). Achieved accuracy 13%
+![image](https://user-images.githubusercontent.com/64994740/152441278-63545f56-1359-4ec8-933f-ed92b7ceb216.png)
+![image](https://user-images.githubusercontent.com/64994740/152441348-26a81e58-37f6-4d1f-9746-2dfd1977ea0c.png)
+2. Ensemble
+
+
+
 
 
 
