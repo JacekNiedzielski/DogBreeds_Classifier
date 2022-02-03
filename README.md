@@ -43,8 +43,10 @@ In case of this project no wrangling steps were necessary. All of the data provi
 After successful training of the CNN based on transfer learning one has to build a classifier. Basically we can divide the classifier into three parts. More details are available in the `dog_app.ipynb`, bellow the summary:<br>
 ![image](https://user-images.githubusercontent.com/64994740/152436393-ff20b657-b924-4561-b96b-5d11645ab92b.png)
 
-The classifier accepts several arguments. Firstly it takes the path to the image which we want to predict. The image has to be transformed into tensor
+The classifier accepts several arguments. Firstly it takes the path to the image which we want to predict. The image has to be transformed into tensor. We utilise the `path_to_tensor` function from the data preprocessing step in order to accomplish that.
 
+Then the classifier makes use of `face_detector` and `dog_detector` functions in order to identify whether or not a human or a dog is present in the picture. The haarcascades and resnet applications are working under the hood of the face_detector and dog_detector functions respectively. More details are given in the jupyter notebook file. 
+Provided that the dog or human is given, the classifier implements the CNN model to predict the breed. In case of dog it is just the inferred breed, in case of human the most resembling dog breed.
 
 
 
