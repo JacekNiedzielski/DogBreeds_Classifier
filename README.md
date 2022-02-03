@@ -29,11 +29,21 @@ As mentioned above I have tried to build the CNN architecture from scratch first
 Since the train performance (accuracy) of the "made from scratch network" was not satisfactory and one would need to make much deeper architecture (which means longer fitting time) to prevent uderfitting, I have decided to make use of transfer learning. To accomplish that, I have used the the keras Resnet50 application which is based on imagenet dataset. The achieved accuracy for this model by this particular commit is around 80%. I have chosen the accuracy as a metrics despite the fact that the data is quite inbalanced. Since the problem domain is a concept of fun application, it is not so important to get high recall or precision as in case of more serious topics (like for example account fraud classification). For more details regarding analysis steps and conclusions please refer to the jupyter notebook beeing part of this repository `dog_app.ipynb`. Please install the ipywidgets to see the visualisations!
 
 ## Data Exploration and Data Visualisation
-
 The data exploration and visualisation steps are presented in detail in `dog_app.ipynb` (ipywidgets library required!). However I would like to emphasize it here once more, that the data used for building the CNN models from scratch is imbalanced. Bigger problem is however low amount of data. Below the summary:<br>
 ![image](https://user-images.githubusercontent.com/64994740/152435343-83554706-6901-4189-ba1d-638c58a2f86c.png)
 
 It means only around 62 photos per breed. Taking into consideration the fact, that some breeds are very simillar to each other, low accuracy shouldn't be a surprise. On the other hand the Resnet50 model is trained on millions of different images from imagenet. This is one for the reasons why it performs much better.
+
+## Data Preprocessing
+In case of this project no preprocessing steps were necessary. All of the data provided by Udacity was "ready to learn". The only data preprocessing steps were those connected to data augmentation, but it shall be rather defined as model tuning, than pure wrangling.
+
+##Implementation
+After successful training of the CNN based on transfer learning one has to build a classifier. Basically we can divide the classifier into three parts. More details are available in the `dog_app.ipynb`, bellow the summary:<br>
+![image](https://user-images.githubusercontent.com/64994740/152436393-ff20b657-b924-4561-b96b-5d11645ab92b.png)
+
+
+
+
 
 
 
