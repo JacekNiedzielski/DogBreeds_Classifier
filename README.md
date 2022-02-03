@@ -20,10 +20,10 @@ The architecture summary of the CNN is visible in the next picture:
 
 
 
-Since the performance (accuracy) of this network was not satisfactory and one would need to make much deeper architecture since the low train accuracy indicates underfitting - which would increase the training time significantly, I have decided to make use of transfer learning. For that I have used the the keras Resnet50 application which is based on imagenet dataset. The achieved accuracy for this model by this particular commit is around 80%. I have chosen the accuracy despite the fact that the data is quite inbalanced. Since the problem domain is concept of fun application is is not so important to get high recall or precision as in case of more serious topics (for example account fraud classification). For more details regarding analysis steps and conclusions please refer to the jupyter notebook beeing part of this repository `dog_app.ipynb`.
+Since the train performance (accuracy) of this network was not satisfactory and one would need to make much deeper architecture (which means longer fitting time) to prevent uderfitting, I have decided to make use of transfer learning. To accomplish that, I have used the the keras Resnet50 application which is based on imagenet dataset. The achieved accuracy for this model by this particular commit is around 80%. I have chosen the accuracy as a metrics despite the fact that the data is quite inbalanced. Since the problem domain is a concept of fun application is is not so important to get high recall or precision as in case of more serious topics (for example account fraud classification). For more details regarding analysis steps and conclusions please refer to the jupyter notebook beeing part of this repository `dog_app.ipynb`. Please install the ipywidgets to see the visualisations!
 
 ## Application
-The application is build on top of `Flask` framework. It makes use of the classification algorithm defined during abovementioned project, and predicts the dog breed of the uploaded photo. If a picture of an human is provided, the application will return the most resembling dog breed. If the photograph contains neither human nor dog (according to the classifier) an appropiate message will be returned.
+The application is build on top of `Flask` framework. It makes use of the classification algorithm defined during abovementioned project, and predicts the dog breed from the uploaded photo. If a picture of an human is provided, the application will return the most resembling dog breed. If the photograph contains neither human nor dog (according to the classifier) an appropiate message will be returned.
 
 **In order to run the application locally:**
 
@@ -35,7 +35,7 @@ The application is build on top of `Flask` framework. It makes use of the classi
 
 ## Jupyter notebook
 The juypter notebook file `dog_app.ipynb` includes more details about analysis and conclusions. You will need to additionally install `pandas` and `seaborn` in order to run it
-
+(ipywidgets are already in the requirements.txt file)
 
 ## Acknowledgments
 Udacity Capstone Dog Project -> https://www.udacity.com/course/data-scientist-nanodegree--nd025
