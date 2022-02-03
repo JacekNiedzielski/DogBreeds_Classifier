@@ -64,7 +64,7 @@ As mentioned before I have tried different architecures and parameters in order 
 
 The performance of the final architecture on example photos is to be found at the end of the `dog_app.ipynb`.
 
-##End Reflections and Improvement Proposals
+## End Reflections and Improvement Proposals
 
 The end solution with 80% accuracy is for sure not perfect, but as mentioned many times before, acceptable for the "fun" application. Investing more time into testing the best CNN architectures, balancing the data sets, so that all of the dog breeds would have approximately the same number of representation photos, and making ensemble of several transfer-learning CNNs are the possible directions for improvement.
 
